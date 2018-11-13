@@ -1,0 +1,163 @@
+<?xml version = "1.0"?>
+<GameData>
+<!-- screenTitle is also used to identify you and your animation. 
+     So make sure to include your name as part of the screenTitle -->
+<title>The Tracker Framework</title>
+<maxStringSize>50</maxStringSize>
+
+<frameCapOn>true</frameCapOn>
+<period>17</period>
+
+<maxFrames>3000000</maxFrames>
+<username>deepas</username>
+
+<view>
+  <width>854</width>
+  <height>480</height>
+  <loc x="30" y="30" />
+</view>
+
+<world>
+  <width>2000</width>
+  <height>793</height>
+</world>
+
+<layer1>
+  <file>assets/Layer_0010_1.png</file>
+  <factor>12</factor>
+  <transparency>true</transparency>	
+</layer1>
+
+<layer2>
+  <file>assets/Layer_0009_2.png</file>
+  <factor>11</factor>
+  <transparency>true</transparency>
+</layer2>
+
+<layer3>
+  <file>assets/Layer_0008_3.png</file>
+  <factor>10</factor>
+  <transparency>true</transparency>
+</layer3>
+
+<layer4>
+  <file>assets/Layer_0006_4.png</file>
+  <factor>9</factor>
+  <transparency>true</transparency>
+</layer4>
+
+<layer5>
+  <file>assets/Layer_0005_5.png</file>
+  <factor>8</factor>
+  <transparency>true</transparency>
+</layer5>
+
+<layer6>
+  <file>assets/Layer_0003_6.png</file>
+  <factor>7</factor>
+  <transparency>true</transparency>
+</layer6>
+
+<layer7>
+  <file>assets/Layer_0002_7.png</file>
+  <factor>6</factor>
+  <transparency>true</transparency>
+</layer7>
+
+<layer8>
+  <file>assets/Layer_0001_8.png</file>
+  <factor>5</factor>x
+  <transparency>true</transparency>
+</layer8>
+
+<layer9>
+  <file>assets/Layer_0000_9.png</file>
+  <factor>4</factor>
+  <transparency>true</transparency>
+</layer9>
+
+
+<font name="font">
+  <file>fonts/arial.ttf</file>
+  <size>24</size>
+  <red>255</red>
+  <green>255</green>
+  <blue>0</blue>
+  <alpha>0</alpha>
+</font>
+
+<fireman>
+  <file>assets/swordsman.png</file>
+  <startLoc x="10" y="665"/>
+  <frames>7</frames>
+  <imageWidth>45</imageWidth>
+  <imageHeight>65</imageHeight>
+  <frameInterval>120</frameInterval>
+  <speedX>170</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</fireman>
+
+<firemanLeft>
+  <file>assets/swordsmanLeft.png</file>
+  <startLoc x="10" y="665"/>
+  <frames>7</frames>
+  <imageWidth>45</imageWidth>
+  <imageHeight>65</imageHeight>
+  <frameInterval>120</frameInterval>
+  <speedX>170</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</firemanLeft>
+
+<bird>
+  <file>assets/birdLeft.png</file>
+  <startLoc x="50" y="430"/>
+  <frames>5</frames>
+  <imageWidth>50</imageWidth>
+  <imageHeight>40</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>120</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>	
+</bird>
+
+<birdLeft>
+  <file>assets/birdRight.png</file>
+  <startLoc x="50" y="430"/>
+  <frames>5</frames>
+  <imageWidth>50</imageWidth>
+  <imageHeight>40</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>120</speedX>
+  <speedY>0</speedY>
+  <transparency>true</transparency>	
+</birdLeft>
+
+<hud>
+  <posX>24</posX>
+  <posY>57</posY>
+  <width>180</width>
+  <height>250</height>
+  <hudColor>
+    <red>132</red>
+    <green>112</green>
+    <blue>255</blue>
+    <alpha>50</alpha>
+  </hudColor>
+  <textColor>
+    <red>46</red>
+    <green>139</green>
+    <blue>89</blue>
+    <alpha>0</alpha>
+  </textColor>
+  <text>Controls</text>
+  <up>w:up</up>
+  <left>a:left</left>
+  <down>s:down</down>
+  <right>d:right</right>
+  <collision>m:strategy</collision>
+  <hudshow>f1:Display Hud</hudshow>
+</hud>
+
+</GameData>
