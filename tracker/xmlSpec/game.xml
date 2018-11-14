@@ -86,6 +86,33 @@
   <alpha>0</alpha>
 </font>
 
+<Bat1>
+  <file>assets/bat1.png</file>
+  <startLoc x="250" y="540"/>
+  <speedX>150</speedX>
+  <speedY>150</speedY>
+  <transparency>false</transparency>
+  <safeDistance>150</safeDistance>
+</Bat1>
+
+<Bat2>
+  <file>assets/bat2.png</file>
+  <startLoc x="500" y="540"/>
+  <speedX>150</speedX>
+  <speedY>150</speedY>
+  <transparency>false</transparency>
+  <safeDistance>150</safeDistance>
+</Bat2>
+
+<Bat3>
+  <file>assets/bat3.png</file>
+  <startLoc x="750" y="540"/>
+  <speedX>150</speedX>
+  <speedY>150</speedY>
+  <transparency>false</transparency>
+  <safeDistance>150</safeDistance>
+</Bat3>
+
 <fireman>
   <file>assets/swordsman.png</file>
   <startLoc x="10" y="665"/>

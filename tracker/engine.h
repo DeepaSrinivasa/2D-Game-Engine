@@ -5,6 +5,10 @@
 #include "world.h"
 #include "viewport.h"
 #include "hud.h"
+#include "smartSprite.h"
+
+class CollisionStrategy;
+class SubjectSprite;
 
 class Engine {
 public:
@@ -28,10 +32,16 @@ private:
   World layer7;
   World layer8;
   World layer9;
+  std::vector<SmartSprite*> bats;
+  std::vector <Drawable*> sprites;
+  SubjectSprite* player;
+  std::vector<CollisionStrategy*> strategies;
+  int currentStrategy;
+  bool collision;
   Viewport& viewport;
 
-  Drawable* bird;
-  Drawable* fireman;
+  //Drawable* bird;
+  //Drawable* fireman;
   int currentSprite;
 
   bool makeVideo;
@@ -44,8 +54,8 @@ private:
 
   Engine(const Engine&) = delete;
   Engine& operator=(const Engine&) = delete;
- // void printScales() const;
-  //void checkForCollisions();
-  //bool hudflag;
+  void printScales() const;
+  void checkForCollisions();
+  
 };
 

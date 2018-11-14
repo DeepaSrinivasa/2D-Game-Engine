@@ -22,6 +22,10 @@ OBJS = \
 	vector2f.o \
 	clock.o \
 	hud.o\
+        subjectSprite.o\
+        smartSprite.o\
+	player.o\
+	collisionStrategy.o\
 	engine.o \
 	main.o
 EXEC = run
