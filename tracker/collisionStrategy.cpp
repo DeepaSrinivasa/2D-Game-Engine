@@ -6,8 +6,13 @@
 #include "renderContext.h"
 
 void RectangularCollisionStrategy::draw() const {
+  SDL_Color displayColor;
+  displayColor.r = Gamedata::getInstance().getXmlInt("hud/textColor/red");
+  displayColor.g = Gamedata::getInstance().getXmlInt("hud/textColor/green");
+  displayColor.b = Gamedata::getInstance().getXmlInt("hud/textColor/blue");
+  displayColor.a = Gamedata::getInstance().getXmlInt("hud/textColor/alpha");
   IoMod::
-  getInstance().writeText("Strategy: Rectangular", 500, 30);
+  getInstance().writeText("Strategy: Rectangular", 600, 10,displayColor);
 }
 
 bool RectangularCollisionStrategy::execute(
@@ -36,8 +41,13 @@ distance(float x1, float y1, float x2, float y2) const {
 }
 
 void MidPointCollisionStrategy::draw() const {
+  SDL_Color displayColor;
+  displayColor.r = Gamedata::getInstance().getXmlInt("hud/textColor/red");
+  displayColor.g = Gamedata::getInstance().getXmlInt("hud/textColor/green");
+  displayColor.b = Gamedata::getInstance().getXmlInt("hud/textColor/blue");
+  displayColor.a = Gamedata::getInstance().getXmlInt("hud/textColor/alpha");
   IoMod::
-  getInstance().writeText("Strategy: Distance", 500, 30);
+  getInstance().writeText("Strategy: Distance", 600, 10, displayColor);
 }
 
 bool MidPointCollisionStrategy::execute(
@@ -58,8 +68,13 @@ bool MidPointCollisionStrategy::execute(
 
 
 void PerPixelCollisionStrategy::draw() const {
+  SDL_Color displayColor;
+  displayColor.r = Gamedata::getInstance().getXmlInt("hud/textColor/red");
+  displayColor.g = Gamedata::getInstance().getXmlInt("hud/textColor/green");
+  displayColor.b = Gamedata::getInstance().getXmlInt("hud/textColor/blue");
+  displayColor.a = Gamedata::getInstance().getXmlInt("hud/textColor/alpha");
   IoMod::
-  getInstance().writeText("Strategy: Per-Pixel ", 500, 30);
+  getInstance().writeText("Strategy: Per-Pixel ", 600, 10, displayColor);
 }
 
 bool PerPixelCollisionStrategy::

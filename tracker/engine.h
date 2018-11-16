@@ -46,7 +46,7 @@ private:
 
   bool makeVideo;
   //Hud& hud;
-  bool showhud;
+  bool flag;
   
   void draw() const;
   void drawhud() const;

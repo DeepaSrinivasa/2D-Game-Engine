@@ -17,8 +17,6 @@
 
 
 Engine::~Engine() { 
-  //delete bird;
-  //delete fireman;
   for(auto sprite : bats){
     delete sprite;
   }
@@ -53,12 +51,10 @@ Engine::Engine() :
   currentStrategy(),
   collision(false),
   viewport( Viewport::getInstance() ),
-  //bird(new TwoMultiSprite("bird")),
-  //fireman(new TwoMultiSprite("fireman")),
   currentSprite(0),
   makeVideo( false ),
   //hud( Hud::getInstance() ),
-  showhud( false )
+  flag( false )
 {
   Vector2f pos = player->getPosition();
   int w = player->getScaledWidth();
@@ -66,14 +62,15 @@ Engine::Engine() :
   bats.push_back(new SmartSprite("Bat1", pos, w, h));
   bats.push_back(new SmartSprite("Bat2", pos, w, h));
   bats.push_back(new SmartSprite("Bat3", pos, w, h));
+  bats.push_back(new SmartSprite("Bat4", pos, w, h));
+  bats.push_back(new SmartSprite("Bat5", pos, w, h));
   
   for(unsigned int i = 0; i < bats.size(); ++i){
     player->attach(bats[i]);
   }
   
   sprites.push_back(new TwoMultiSprite("bird"));
-  sprites.push_back(new TwoMultiSprite("fireman"));
-  
+   
   strategies.push_back( new PerPixelCollisionStrategy );
   strategies.push_back( new RectangularCollisionStrategy );
   strategies.push_back( new MidPointCollisionStrategy );
@@ -83,11 +80,11 @@ Engine::Engine() :
 }
 
 void Engine::draw() const {
-  SDL_Color textColor;
-  textColor.r = Gamedata::getInstance().getXmlInt("font/red");
-  textColor.g = Gamedata::getInstance().getXmlInt("font/green");
-  textColor.b = Gamedata::getInstance().getXmlInt("font/blue");
-  textColor.a = Gamedata::getInstance().getXmlInt("font/alpha");
+  SDL_Color displayColor;
+  displayColor.r = Gamedata::getInstance().getXmlInt("hud/textColor/red");
+  displayColor.g = Gamedata::getInstance().getXmlInt("hud/textColor/green");
+  displayColor.b = Gamedata::getInstance().getXmlInt("hud/textColor/blue");
+  displayColor.a = Gamedata::getInstance().getXmlInt("hud/textColor/alpha");
 
   layer1.draw();
   layer2.draw();
@@ -109,22 +106,16 @@ void Engine::draw() const {
 
   if(bats.size() > 0){
     std::stringstream strm;
-    strm<<bats.size()<<"Bats remaining";
-    IoMod::getInstance().writeText(strm.str(), 500, 120, textColor);
+    strm<<bats.size()<<" Bats remaining";
+    IoMod::getInstance().writeText(strm.str(), 600, 30,displayColor);
   }
   else{
-    SDL_Color textColor1;
-    textColor1.r = Gamedata::getInstance().getXmlInt("hud/border/Color/red");
-    textColor1.g = Gamedata::getInstance().getXmlInt("hud/border/Color/blue");
-    textColor1.b = Gamedata::getInstance().getXmlInt("hud/border/Color/green");
-    textColor1.a = Gamedata::getInstance().getXmlInt("hud/border/Color/alpha");
-
-    IoMod::getInstance().writeText(" All Bats collected", 500, 120,textColor1);
-    IoMod::getInstance().writeText(" you cleared", 500, 150, textColor1);
+    IoMod::getInstance().writeText("You have killed all bats", 500, 120,displayColor);
+    IoMod::getInstance().writeText(" You are clear to go", 500, 150, displayColor);
   }
   strategies[currentStrategy]->draw();
   if ( collision ) {
-    IoMod::getInstance().writeText("Oops: Collision", 500, 60);
+    IoMod::getInstance().writeText("Oops: Collision", 600, 50,displayColor);
   }  
 
   player->draw();
@@ -134,7 +125,7 @@ void Engine::draw() const {
 }
 
 void Engine::drawhud() const {
-  if (showhud || clock.getSeconds() <= 3){
+  if (flag || clock.getSeconds() <= 3){
   	Hud::getInstance().draw(renderer);
   }
 }
@@ -215,8 +206,8 @@ void Engine::play() {
            currentStrategy = (1 + currentStrategy) % strategies.size();
         }
  	if( keystate[SDL_SCANCODE_F1]){
-	  if(showhud) showhud = false;
-	  else showhud = true;
+	  if(flag) flag = false;
+	  else flag = true;
         }
 	if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
@@ -237,14 +228,14 @@ void Engine::play() {
       if (keystate[SDL_SCANCODE_A]) {
         player->left();
       }
-      if (keystate[SDL_SCANCODE_D]) {
-        player->right();
+      if (keystate[SDL_SCANCODE_S]) {
+        player->down();
       }
       if (keystate[SDL_SCANCODE_W]) {
         player->up();
       }
-      if (keystate[SDL_SCANCODE_S]) {
-        player->down();
+      if (keystate[SDL_SCANCODE_D]) {
+        player->right();
       }
       draw();
       update(ticks);

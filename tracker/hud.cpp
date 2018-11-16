@@ -3,6 +3,7 @@
 #include <sstream>
 #include <SDL.h>
 #include "hud.h"
+#include "clock.h"
 
 
 Hud& Hud::getInstance() {
@@ -22,20 +23,7 @@ void Hud::draw(SDL_Renderer * const renderer){
   box.y = gdata.getXmlInt("hud/posY");
   box.w = gdata.getXmlInt("hud/width");
   box.h = gdata.getXmlInt("hud/height");
-  /*int borderThickness = gdata.getXmlInt("hud/border/thickness");
-  SDL_Color borderColor;
-  borderColor.r = gdata.getXmlInt("hud/border/Color/red");
-  borderColor.g = gdata.getXmlInt("hud/border/Color/green");
-  borderColor.b = gdata.getXmlInt("hud/border/Color/blue");
-  borderColor.a = gdata.getXmlInt("hud/border/Color/alpha");
-  SDL_SetRenderDrawColor(renderer, borderColor.r, borderColor.g, borderColor.b, borderColor.a);
-  for(int i =1; i<=borderThickness; i++){
-    SDL_RenderDrawRect(renderer, &box);
-    box.x += 1;
-    box.y += 1;
-    box.w -= 2;
-    box.h -= 2;
-  }*/
+  
   SDL_Color background;
   background.r = gdata.getXmlInt("hud/hudColor/red");
   background.g = gdata.getXmlInt("hud/hudColor/green");
@@ -48,7 +36,10 @@ void Hud::draw(SDL_Renderer * const renderer){
   textColor.g = gdata.getXmlInt("hud/textColor/green");
   textColor.b = gdata.getXmlInt("hud/textColor/blue");
   textColor.a = gdata.getXmlInt("hud/textColor/alpha");
-  io.writeText(gdata.getXmlStr("hud/text").c_str(), box.x+=15, box.y+=15, textColor);
+  std::ostringstream strm ;
+  strm << "Fps:"<< Clock::getInstance().getFps()<<std::endl;
+  IoMod::getInstance().writeText(strm.str(),box.x+=15,box.y+=15,textColor);
+  io.writeText(gdata.getXmlStr("hud/text").c_str(), box.x, box.y+=30, textColor);
   io.writeText(gdata.getXmlStr("hud/up").c_str(), box.x, box.y+=30, textColor);
   io.writeText(gdata.getXmlStr("hud/left").c_str(), box.x, box.y+=30, textColor);
   io.writeText(gdata.getXmlStr("hud/right").c_str(), box.x, box.y+=30, textColor);

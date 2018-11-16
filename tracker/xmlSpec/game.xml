@@ -18,7 +18,7 @@
 </view>
 
 <world>
-  <width>2000</width>
+  <width>1800</width>
   <height>793</height>
 </world>
 
@@ -88,30 +88,49 @@
 
 <Bat1>
   <file>assets/bat1.png</file>
-  <startLoc x="250" y="540"/>
+  <startLoc x="150" y="540"/>
   <speedX>150</speedX>
   <speedY>150</speedY>
   <transparency>false</transparency>
-  <safeDistance>150</safeDistance>
+  <safeDistance>60</safeDistance>
 </Bat1>
 
 <Bat2>
   <file>assets/bat2.png</file>
-  <startLoc x="500" y="540"/>
+  <startLoc x="350" y="340"/>
   <speedX>150</speedX>
   <speedY>150</speedY>
   <transparency>false</transparency>
-  <safeDistance>150</safeDistance>
+  <safeDistance>60</safeDistance>
 </Bat2>
 
 <Bat3>
   <file>assets/bat3.png</file>
-  <startLoc x="750" y="540"/>
+  <startLoc x="650" y="640"/>
   <speedX>150</speedX>
   <speedY>150</speedY>
   <transparency>false</transparency>
-  <safeDistance>150</safeDistance>
+  <safeDistance>60</safeDistance>
 </Bat3>
+
+<Bat4>
+  <file>assets/bat4.png</file>
+  <startLoc x="1000" y="540"/>
+  <speedX>150</speedX>
+  <speedY>150</speedY>
+  <transparency>false</transparency>
+  <safeDistance>60</safeDistance>
+</Bat4>
+
+<Bat5>
+  <file>assets/bat5.png</file>
+  <startLoc x="1250" y="540"/>
+  <speedX>150</speedX>
+  <speedY>150</speedY>
+  <transparency>false</transparency>
+  <safeDistance>50</safeDistance>
+</Bat5>
+
 
 <fireman>
   <file>assets/swordsman.png</file>
@@ -121,7 +140,7 @@
   <imageHeight>65</imageHeight>
   <frameInterval>120</frameInterval>
   <speedX>170</speedX>
-  <speedY>0</speedY>
+  <speedY>170</speedY>
   <transparency>false</transparency>
 </fireman>
 
@@ -133,7 +152,7 @@
   <imageHeight>65</imageHeight>
   <frameInterval>120</frameInterval>
   <speedX>170</speedX>
-  <speedY>0</speedY>
+  <speedY>170</speedY>
   <transparency>false</transparency>
 </firemanLeft>
 
@@ -174,7 +193,7 @@
   </hudColor>
   <textColor>
     <red>46</red>
-    <green>139</green>
+    <green>112</green>
     <blue>89</blue>
     <alpha>0</alpha>
   </textColor>
