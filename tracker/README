@@ -1,0 +1,28 @@
+Name:Deepa Srinivasa
+
+Course:6160
+
+Clemson Email Address:deepas@g.clemson.edu
+
+Project no: 4
+
+Project due date: Nov. 16, 2018
+
+Project description: My project is about a fireman being tramped in a Dark forest and he has to fight his enemies that is the bats in the game for him to reach a safe place. There are 5 bats in the game for him to kill so that he can move forward, everytime a bat is killed the number is seen decreased from the observer pattern in the viewport. When all the bats are killed the user will be notified that he is clear to go. Until the all the bats are killed he cannot proceed further. A bird is seen flying in the forest and that is a harmless bird. The Two way multisprite bird was used in the game to get a feel for the forest.
+
+I like to extend the project by incorporating another type of enemy which has advanced powers than the ordinary bats and the fireman faces different kind of challenges to find a safe place. In this stage either the fireman lives or will die in the hands of the another enemy, when the fireman does not have enough energy and resources to fight. 
+
+Where I got my sprites:I have used three sprites bird, man and bat sprites. I have downloaded the sprites from internet.
+
+https://opengameart.org/content/2d-rpg-characters
+
+https://www.pinterest.com/pin/436497388859683801/
+
+How many backgrounds do I have:I have 9 backgrounds
+https://edermunizz.itch.io/free-pixel-art-forest
+
+
+The easiest part of this project: Easiest part was creating hud for the game.
+
+
+Problems that I had in completing this project: Finding proper sprites that match my theme and implementing collision strategy was difficult.
