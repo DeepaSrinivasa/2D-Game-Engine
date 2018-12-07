@@ -76,6 +76,7 @@
   <transparency>true</transparency>
 </layer9>
 
+<numberOfBats>12</numberOfBats>
 
 <font name="font">
   <file>fonts/arial.ttf</file>
@@ -88,72 +89,85 @@
 
 <Bat1>
   <file>assets/bat1.png</file>
-  <startLoc x="150" y="540"/>
+   <frames>4</frames>
+  <imageWidth>60</imageWidth>
+  <imageHeight>60</imageHeight>
+  <frameInterval>50</frameInterval>
+  <startLoc x="100" y="300"/>
   <speedX>150</speedX>
   <speedY>150</speedY>
   <transparency>false</transparency>
-  <safeDistance>80</safeDistance>
+  <safeDistance>100</safeDistance>
+  <chunk>
+    <size>12</size>
+    <distance>80</distance>
+  </chunk>
 </Bat1>
 
-<Bat2>
-  <file>assets/bat2.png</file>
-  <startLoc x="350" y="340"/>
+<Bat1Left>
+  <file>assets/bat1Left.png</file>
+   <frames>4</frames>
+  <imageWidth>60</imageWidth>
+  <imageHeight>60</imageHeight>
+  <frameInterval>50</frameInterval>
+  <startLoc x="100" y="300"/>
   <speedX>150</speedX>
   <speedY>150</speedY>
   <transparency>false</transparency>
-  <safeDistance>80</safeDistance>
-</Bat2>
+  <safeDistance>100</safeDistance>
+  <chunk>
+    <size>12</size>
+    <distance>80</distance>
+  </chunk>
+</Bat1Left>
 
-<Bat3>
-  <file>assets/bat3.png</file>
-  <startLoc x="650" y="640"/>
-  <speedX>150</speedX>
-  <speedY>150</speedY>
-  <transparency>false</transparency>
-  <safeDistance>80</safeDistance>
-</Bat3>
 
-<Bat4>
-  <file>assets/bat4.png</file>
-  <startLoc x="1000" y="540"/>
-  <speedX>150</speedX>
-  <speedY>150</speedY>
+<firebullets>
+  <file>assets/firesprite.png</file>
+  <interval>300</interval>
+  <distance>420</distance>
+  <startLoc x="80" y="80"/>
+  <speedX>450</speedX>
+  <speedY>450</speedY>
   <transparency>false</transparency>
-  <safeDistance>80</safeDistance>
-</Bat4>
-
-<Bat5>
-  <file>assets/bat5.png</file>
-  <startLoc x="1250" y="540"/>
-  <speedX>150</speedX>
-  <speedY>150</speedY>
-  <transparency>false</transparency>
-  <safeDistance>80</safeDistance>
-</Bat5>
+  <safeDistance>150</safeDistance>
+  <strategy>perpixel</strategy>
+</firebullets>
 
 
 <fireman>
   <file>assets/swordsman.png</file>
   <startLoc x="10" y="665"/>
   <frames>7</frames>
+  <bullet>firebullets</bullet>
   <imageWidth>45</imageWidth>
   <imageHeight>65</imageHeight>
   <frameInterval>120</frameInterval>
   <speedX>170</speedX>
   <speedY>170</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>7</size>
+    <distance>200</distance>
+</chunk>
 </fireman>
 
 <firemanLeft>
   <file>assets/swordsmanLeft.png</file>
+  <bullet>energyBall</bullet>
   <startLoc x="10" y="665"/>
   <frames>7</frames>
+  <bullet>firebullets</bullet>
   <imageWidth>45</imageWidth>
   <imageHeight>65</imageHeight>
   <frameInterval>120</frameInterval>
   <speedX>170</speedX>
   <speedY>170</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>7</size>
+    <distance>200</distance>
+</chunk>
 </firemanLeft>
 
 <bird>
@@ -163,9 +177,13 @@
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>120</speedX>
-  <speedY>0</speedY>
-  <transparency>true</transparency>	
+  <speedX>100</speedX>
+  <speedY>100</speedY>
+  <transparency>true</transparency>
+  <chunk>
+    <size>7</size>
+    <distance>200</distance>
+  </chunk>	
 </bird>
 
 <birdLeft>
@@ -175,14 +193,24 @@
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
   <frameInterval>50</frameInterval>
-  <speedX>120</speedX>
-  <speedY>0</speedY>
-  <transparency>true</transparency>	
+  <speedX>100</speedX>
+  <speedY>100</speedY>
+  <transparency>true</transparency>
+  <chunk>
+    <size>7</size>
+    <distance>200</distance>
+  </chunk>	
 </birdLeft>
 
 <hud>
-  <posX>24</posX>
-  <posY>57</posY>
+  <Pool>
+    <posX>670</posX>
+    <posY>410</posY>
+    <width>180</width>
+    <height>60</height>
+  </Pool>
+  <posX>5</posX>
+  <posY>5</posY>
   <width>180</width>
   <height>250</height>
   <hudColor>

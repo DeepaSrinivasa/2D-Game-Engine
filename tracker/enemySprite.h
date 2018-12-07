@@ -1,18 +1,17 @@
-#ifndef BMULTISPRITE__H
-#define BMULTISPRITE__H
+#ifndef ENEMYSPRITE_H
+#define ENEMYSPRITE_H
 #include <string>
 #include <vector>
 #include <cmath>
 #include "drawable.h"
-//#include "explodingSprite.h"
 
 class ExplodingSprite;
 
-class MultiSprite : public Drawable {
+class EnemySprite : public Drawable {
 public:
-  MultiSprite(const std::string&);
-  MultiSprite(const MultiSprite&);
-  ~MultiSprite();
+  EnemySprite(const std::string&);
+  EnemySprite(const EnemySprite&);
+  ~EnemySprite();
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
@@ -30,7 +29,11 @@ public:
     return images[currentFrame]->getSurface();
   }
   virtual void explode();
+  bool deleteenemy() const { return deletesprite; }
+  
 protected:
+  std::vector<Image *> imagesRight;
+  std::vector<Image *> imagesLeft;
   std::vector<Image *> images;
   ExplodingSprite* explosion;
 
@@ -40,8 +43,9 @@ protected:
   float timeSinceLastFrame;
   int worldWidth;
   int worldHeight;
-
+  bool deletesprite;
   void advanceFrame(Uint32 ticks);
-  MultiSprite& operator=(const MultiSprite&);
+  EnemySprite& operator=(const EnemySprite&);
+  Vector2f makeVelocity(int, int) const;
 };
 #endif

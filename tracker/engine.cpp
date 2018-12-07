@@ -12,8 +12,8 @@
 #include "frameGenerator.h"
 #include "player.h"
 #include "smartSprite.h"
-#include "subjectSprite.h"
-#include "collisionStrategy.h"
+#include "shootingSprite.h"
+#include "enemySprite.h"
 
 
 Engine::~Engine() { 
@@ -46,35 +46,30 @@ Engine::Engine() :
   layer9("layer9", Gamedata::getInstance().getXmlInt("layer9/factor")),
   bats(),
   sprites(),
-  player(new SubjectSprite("fireman")),
+  player(new ShootingSprite("fireman")),
   strategies(),
   currentStrategy(),
   collision(false),
   viewport( Viewport::getInstance() ),
   currentSprite(0),
   makeVideo( false ),
-  //hud( Hud::getInstance() ),
-  flag( false )
+  flag( false ),
+  shootingLeft(false)
 {
+  int n = Gamedata::getInstance().getXmlInt("numberOfBats");
+  bats.reserve(n);
   Vector2f pos = player->getPosition();
   int w = player->getScaledWidth();
   int h = player->getScaledHeight();
-  bats.push_back(new SmartSprite("Bat1", pos, w, h));
-  bats.push_back(new SmartSprite("Bat2", pos, w, h));
-  bats.push_back(new SmartSprite("Bat3", pos, w, h));
-  bats.push_back(new SmartSprite("Bat4", pos, w, h));
-  bats.push_back(new SmartSprite("Bat5", pos, w, h));
-  
-  for(unsigned int i = 0; i < bats.size(); ++i){
+  for(int i = 0; i<n; ++i){
+    bats.push_back(new SmartSprite("Bat1", pos, w, h));
     player->attach(bats[i]);
   }
   
   sprites.push_back(new TwoMultiSprite("bird"));
    
   strategies.push_back( new PerPixelCollisionStrategy );
-  strategies.push_back( new RectangularCollisionStrategy );
-  strategies.push_back( new MidPointCollisionStrategy );
-
+  
   Viewport::getInstance().setObjectToTrack(player);
   std::cout << "Loading complete" << std::endl;
 }
@@ -101,7 +96,7 @@ void Engine::draw() const {
   }
 
   for(auto sprite : bats){
-    sprite->draw();
+      sprite->draw();
   }
 
   if(bats.size() > 0){
@@ -110,12 +105,12 @@ void Engine::draw() const {
     IoMod::getInstance().writeText(strm.str(), 600, 30,displayColor);
   }
   else{
-    IoMod::getInstance().writeText("You have killed all bats", 500, 120,displayColor);
-    IoMod::getInstance().writeText(" You are clear to go", 500, 150, displayColor);
+    IoMod::getInstance().writeText("You have killed all bats", 500, 50,displayColor);
+    IoMod::getInstance().writeText(" You are clear to go", 500, 100, displayColor);
   }
   strategies[currentStrategy]->draw();
   if ( collision ) {
-    IoMod::getInstance().writeText("Oops: Collision", 600, 50,displayColor);
+    IoMod::getInstance().writeText("Oops: Collision, Player is dead", 200, 50,displayColor);
   }  
 
   player->draw();
@@ -125,28 +120,25 @@ void Engine::draw() const {
 }
 
 void Engine::drawhud() const {
-  if (flag || clock.getSeconds() <= 3){
-  	Hud::getInstance().draw(renderer);
+   if (flag || clock.getSeconds() <= 3){
+    Hud::getInstance().draw(renderer);
+    Hud::getInstance().drawPool(renderer, player);
+
   }
 }
 
+
 void Engine::checkForCollisions() {
   collision = false;
-  for ( const Drawable* d : sprites ) {
+  for (  EnemySprite* d : bats ) {
     if ( strategies[currentStrategy]->execute(*player, *d) ) {
       collision = true;
     }
   }
-
-  auto it = bats.begin();
-  while ( it != bats.end() ) {
-    if ( strategies[currentStrategy]->execute(*player, **it) ) {
-      SmartSprite* doa = *it;
-      player->detach(doa);
-      delete doa;
-      it = bats.erase(it);
+  for ( const Drawable* d : sprites ) {
+    if ( strategies[currentStrategy]->execute(*player, *d) ) {
+      collision = true;
     }
-    else ++it;
   }
   if ( collision ) {
     player->collided();
@@ -154,6 +146,43 @@ void Engine::checkForCollisions() {
   else {
     player->missed();
     collision = false;
+  }
+  if(strategies[currentStrategy]->execute(*sprites[0], *player)){
+    collision = true;
+    player->explode();
+  }
+  auto it = bats.begin();
+   while ( it != bats.end() ) {
+     if ( strategies[currentStrategy]->execute(*player, **it)) {
+	(*it)->explode();
+	  (*it)->setPosition(Vector2f((*it)->getPosition()[0], (*it)->getPosition()[1]));	
+		++it; 
+      }
+      else if((player)->collidedWith((*it))){
+	(*it)->explode();
+	(*it)->setPosition(Vector2f((*it)->getPosition()[0], (*it)->getPosition()[1]));
+        	 ++it;
+       }
+       else ++it;
+    }
+
+  it = bats.begin();
+  while ( it != bats.end() ) {
+    if ( (*it)->deleteenemy() ) {
+      SmartSprite* doa = *it;
+      player->detach(doa);
+      delete doa;
+      it = bats.erase(it);
+   }
+    else ++it;
+  }
+	
+  auto it1 = sprites.begin();
+  while ( it1 != sprites.end() ) {
+    if ( strategies[currentStrategy]->execute(*player, **it1) ) {
+      it1 = sprites.erase(it1);
+    }
+    else ++it1;
   }
 }
 
@@ -202,11 +231,18 @@ void Engine::play() {
           if ( clock.isPaused() ) clock.unpause();
           else clock.pause();
         }
+	if ( keystate[SDL_SCANCODE_SPACE] ) {
+	  if(shootingLeft==true){
+	  	player->shootLeft();
+	  }
+	  else		
+            player->shoot();
+	}
         if ( keystate[SDL_SCANCODE_M] ) {
            currentStrategy = (1 + currentStrategy) % strategies.size();
         }
  	if( keystate[SDL_SCANCODE_F1]){
-	  if(flag) flag = false;
+	 if(flag) flag = false;
 	  else flag = true;
         }
 	if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
@@ -227,6 +263,7 @@ void Engine::play() {
       clock.incrFrame();
       if (keystate[SDL_SCANCODE_A]) {
         player->left();
+ 	shootingLeft = true;
       }
       if (keystate[SDL_SCANCODE_S]) {
         player->down();
@@ -236,6 +273,7 @@ void Engine::play() {
       }
       if (keystate[SDL_SCANCODE_D]) {
         player->right();
+	shootingLeft = false;
       }
       draw();
       update(ticks);

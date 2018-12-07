@@ -26,6 +26,12 @@ OBJS = \
         smartSprite.o\
 	player.o\
 	collisionStrategy.o\
+        shootingSprite.o\
+        explodingSprite.o\
+	enemySprite.o\
+ 	bulletPool.o\
+        chunk.o\
+	bullet.o\
 	engine.o \
 	main.o
 EXEC = run

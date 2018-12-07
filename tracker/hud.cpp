@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include "hud.h"
 #include "clock.h"
+#include "bulletPool.h"
 
 
 Hud& Hud::getInstance() {
@@ -47,3 +48,35 @@ void Hud::draw(SDL_Renderer * const renderer){
   io.writeText(gdata.getXmlStr("hud/collision").c_str(), box.x, box.y+=30, textColor);
   io.writeText(gdata.getXmlStr("hud/hudshow").c_str(), box.x, box.y+=30, textColor);
 }
+
+
+void Hud::drawPool(SDL_Renderer * const renderer, ShootingSprite* const player){
+  SDL_Rect box;
+  box.x = gdata.getXmlInt("hud/Pool/posX");
+  box.y = gdata.getXmlInt("hud/Pool/posY");
+  box.w = gdata.getXmlInt("hud/Pool/width");
+  box.h = gdata.getXmlInt("hud/Pool/height");
+ 
+  SDL_Color background;
+  background.r = gdata.getXmlInt("hud/hudColor/red");
+  background.g = gdata.getXmlInt("hud/hudColor/green");
+  background.b = gdata.getXmlInt("hud/hudColor/blue");
+  background.a = gdata.getXmlInt("hud/hudColor/alpha");
+  SDL_SetRenderDrawColor(renderer, background.r, background.g, background.b, background.a);
+  SDL_RenderFillRect(renderer, &box);
+  
+  SDL_Color textColor;
+  textColor.r = gdata.getXmlInt("hud/textColor/red");
+  textColor.g = gdata.getXmlInt("hud/textColor/green");
+  textColor.b = gdata.getXmlInt("hud/textColor/blue");
+  textColor.a = gdata.getXmlInt("hud/textColor/alpha");
+  std::stringstream stream;
+  stream << "Active bullets: " << player->bulletCount();
+  io.writeText(stream.str(), box.x+=5, box.y+=5, textColor);
+  stream.clear();
+  stream.str("");
+  stream << "Bullet pool: " << player->freeCount();
+  io.writeText(stream.str(), box.x, box.y+=30, textColor);
+  
+}
+

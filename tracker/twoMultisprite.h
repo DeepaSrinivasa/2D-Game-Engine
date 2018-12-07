@@ -1,14 +1,17 @@
-#ifndef MULTISPRITE__H
-#define MULTISPRITE__H
+#ifndef TWOMULTISPRITE__H
+#define TWOMULTISPRITE__H
 #include <string>
 #include <vector>
 #include <cmath>
 #include "drawable.h"
 
+class ExplodingSprite;
+
 class TwoMultiSprite : public Drawable {
 public:
   TwoMultiSprite(const std::string&);
   TwoMultiSprite(const TwoMultiSprite&);
+  ~TwoMultiSprite();
 
   virtual void draw() const;
   virtual void update(Uint32 ticks);
@@ -25,11 +28,14 @@ public:
   virtual const SDL_Surface* getSurface() const { 
     return images[currentFrame]->getSurface();
   }
-
+  virtual void explode();
+  bool deleteenemy() const { return deletesprite; }
+  
 protected:
   std::vector<Image *> imagesRight;
   std::vector<Image *> imagesLeft;
   std::vector<Image *> images;
+  ExplodingSprite* explosion;
 
   unsigned currentFrame;
   unsigned numberOfFrames;
@@ -37,7 +43,7 @@ protected:
   float timeSinceLastFrame;
   int worldWidth;
   int worldHeight;
-
+  bool deletesprite;
   void advanceFrame(Uint32 ticks);
   TwoMultiSprite& operator=(const TwoMultiSprite&);
 };

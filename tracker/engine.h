@@ -6,16 +6,20 @@
 #include "viewport.h"
 #include "hud.h"
 #include "smartSprite.h"
+//#include "bulletpool.h"
 
+
+
+class ShootingSprite;
 class CollisionStrategy;
-class SubjectSprite;
+//class SubjectSprite;
 
 class Engine {
 public:
   Engine ();
   ~Engine ();
   void play();
-  void switchSprite();
+  // void switchSprite();
 
 private:
   const RenderContext* rc;
@@ -34,19 +38,18 @@ private:
   World layer9;
   std::vector<SmartSprite*> bats;
   std::vector <Drawable*> sprites;
-  SubjectSprite* player;
+  ShootingSprite* player;
   std::vector<CollisionStrategy*> strategies;
   int currentStrategy;
   bool collision;
   Viewport& viewport;
 
-  //Drawable* bird;
-  //Drawable* fireman;
   int currentSprite;
 
   bool makeVideo;
-  //Hud& hud;
   bool flag;
+  
+  bool shootingLeft;
   
   void draw() const;
   void drawhud() const;

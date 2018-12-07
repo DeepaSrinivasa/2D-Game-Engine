@@ -19,26 +19,28 @@ void SmartSprite::goDown()  { setVelocityY( fabs(getVelocityY()) );  }
 
 SmartSprite::SmartSprite(const std::string& name, const Vector2f& pos, 
   int w, int h) :
-  Sprite(name),
+  EnemySprite(name),
   playerPos(pos),
   playerWidth(w),
   playerHeight(h),
   currentMode(NORMAL),
-  safeDistance(Gamedata::getInstance().getXmlFloat(name+"/safeDistance"))
+  safeDistance(Gamedata::getInstance().getXmlFloat(name+"/safeDistance")),
+  checkExplode(false)
 {}
 
 
 SmartSprite::SmartSprite(const SmartSprite& s) : 
-  Sprite(s),
+  EnemySprite(s),
   playerPos(s.playerPos),
   playerWidth(s.playerWidth),
   playerHeight(s.playerHeight),
   currentMode(s.currentMode),
-  safeDistance(s.safeDistance)
+  safeDistance(s.safeDistance),
+  checkExplode(s.checkExplode)
 {}
 
 void SmartSprite::update(Uint32 ticks) { 
-  Sprite::update(ticks);
+  EnemySprite::update(ticks);
   float x= getX()+getImage()->getWidth()/2;
   float y= getY()+getImage()->getHeight()/2;
   float ex= playerPos[0]+playerWidth/2;
