@@ -65,8 +65,12 @@ Engine::Engine() :
     bats.push_back(new SmartSprite("Bat1", pos, w, h));
     player->attach(bats[i]);
   }
-  
+ 
   sprites.push_back(new TwoMultiSprite("bird"));
+  sprites.push_back(new TwoMultiSprite("bird1"));
+  sprites.push_back(new TwoMultiSprite("bird2"));
+  sprites.push_back(new TwoMultiSprite("bird3"));
+  sprites.push_back(new TwoMultiSprite("bird4"));
    
   strategies.push_back( new PerPixelCollisionStrategy );
   
@@ -147,10 +151,13 @@ void Engine::checkForCollisions() {
     player->missed();
     collision = false;
   }
-  if(strategies[currentStrategy]->execute(*sprites[0], *player)){
-    collision = true;
-    player->explode();
+  for(unsigned int j=0;j<sprites.size();++j){
+    if(strategies[currentStrategy]->execute(*sprites[j], *player)){
+      collision = true;
+      player->explode();
+   }
   }
+  
   auto it = bats.begin();
    while ( it != bats.end() ) {
      if ( strategies[currentStrategy]->execute(*player, **it)) {
