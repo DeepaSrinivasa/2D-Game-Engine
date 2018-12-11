@@ -54,7 +54,10 @@ Engine::Engine() :
   currentSprite(0),
   makeVideo( false ),
   flag( false ),
-  shootingLeft(false)
+  shootingLeft(false),
+  sound(),
+  godmodeFlag(0),
+  godmode(false)
 {
   int n = Gamedata::getInstance().getXmlInt("numberOfBats");
   bats.reserve(n);
@@ -71,6 +74,8 @@ Engine::Engine() :
   sprites.push_back(new TwoMultiSprite("bird2"));
   sprites.push_back(new TwoMultiSprite("bird3"));
   sprites.push_back(new TwoMultiSprite("bird4"));
+  sprites.push_back(new TwoMultiSprite("bird5"));
+  sprites.push_back(new TwoMultiSprite("bird6"));
    
   strategies.push_back( new PerPixelCollisionStrategy );
   
@@ -112,8 +117,13 @@ void Engine::draw() const {
     IoMod::getInstance().writeText("You have killed all bats", 500, 50,displayColor);
     IoMod::getInstance().writeText(" You are clear to go", 500, 100, displayColor);
   }
+  if(godmode==true){
+    std::stringstream strm1;
+    strm1<<"God Mode: ON";
+    IoMod::getInstance().writeText(strm1.str(),650,30,displayColor);
+  }
   strategies[currentStrategy]->draw();
-  if ( collision ) {
+  if ( (collision) && (godmode != true)) {
     IoMod::getInstance().writeText("Oops: Collision, Player is dead", 200, 50,displayColor);
   }  
 
@@ -136,7 +146,7 @@ void Engine::checkForCollisions() {
   collision = false;
   for (  EnemySprite* d : bats ) {
     if ( strategies[currentStrategy]->execute(*player, *d) ) {
-      collision = true;
+      //collision = true;
     }
   }
   for ( const Drawable* d : sprites ) {
@@ -154,18 +164,23 @@ void Engine::checkForCollisions() {
   for(unsigned int j=0;j<sprites.size();++j){
     if(strategies[currentStrategy]->execute(*sprites[j], *player)){
       collision = true;
-      player->explode();
+      sound[5];
+      if(!godmode){
+        player->explode();
+      }
    }
   }
   
   auto it = bats.begin();
    while ( it != bats.end() ) {
      if ( strategies[currentStrategy]->execute(*player, **it)) {
+       sound[3];
 	(*it)->explode();
 	  (*it)->setPosition(Vector2f((*it)->getPosition()[0], (*it)->getPosition()[1]));	
 		++it; 
       }
       else if((player)->collidedWith((*it))){
+        sound[3];
 	(*it)->explode();
 	(*it)->setPosition(Vector2f((*it)->getPosition()[0], (*it)->getPosition()[1]));
         	 ++it;
@@ -183,14 +198,7 @@ void Engine::checkForCollisions() {
    }
     else ++it;
   }
-	
-  auto it1 = sprites.begin();
-  while ( it1 != sprites.end() ) {
-    if ( strategies[currentStrategy]->execute(*player, **it1) ) {
-      it1 = sprites.erase(it1);
-    }
-    else ++it1;
-  }
+
 }
 
 
@@ -252,6 +260,11 @@ void Engine::play() {
 	 if(flag) flag = false;
 	  else flag = true;
         }
+        if(keystate[SDL_SCANCODE_G]){
+	  ++godmodeFlag;
+	  if(godmodeFlag%2!=0){godmode=true;}
+          else {godmode=false;}
+	}
 	if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
           makeVideo = true;

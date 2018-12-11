@@ -6,7 +6,7 @@
 #include "viewport.h"
 #include "hud.h"
 #include "smartSprite.h"
-//#include "bulletpool.h"
+#include "sound.h"
 
 
 
@@ -50,6 +50,9 @@ private:
   bool flag;
   
   bool shootingLeft;
+  SDLSound sound;
+  int godmodeFlag;
+  bool godmode;
   
   void draw() const;
   void drawhud() const;

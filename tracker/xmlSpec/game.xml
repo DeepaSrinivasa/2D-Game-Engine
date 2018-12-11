@@ -18,7 +18,7 @@
 </view>
 
 <world>
-  <width>1800</width>
+  <width>6000</width>
   <height>793</height>
 </world>
 
@@ -27,6 +27,7 @@
   <factor>12</factor>
   <transparency>true</transparency>	
 </layer1>
+
 
 <layer2>
   <file>assets/Layer_0009_2.png</file>
@@ -161,8 +162,8 @@
   <imageWidth>45</imageWidth>
   <imageHeight>65</imageHeight>
   <frameInterval>120</frameInterval>
-  <speedX>200</speedX>
-  <speedY>200</speedY>
+  <speedX>250</speedX>
+  <speedY>250</speedY>
   <transparency>false</transparency>
   <chunk>
     <size>7</size>
@@ -172,7 +173,7 @@
 
 <bird>
   <file>assets/birdLeft.png</file>
-  <startLoc x="300" y="30"/>
+  <startLoc x="100" y="30"/>
   <frames>5</frames>
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
@@ -188,7 +189,7 @@
 
 <birdLeft>
   <file>assets/birdRight.png</file>
-  <startLoc x="300" y="30"/>
+  <startLoc x="100" y="30"/>
   <frames>5</frames>
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
@@ -204,7 +205,7 @@
 
 <bird1>
   <file>assets/birdLeft.png</file>
-  <startLoc x="300" y="700"/>
+  <startLoc x="1000" y="120"/>
   <frames>5</frames>
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
@@ -220,7 +221,7 @@
 
 <bird1Left>
   <file>assets/birdRight.png</file>
-  <startLoc x="300" y="700"/>
+  <startLoc x="1000" y="120"/>
   <frames>5</frames>
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
@@ -236,7 +237,7 @@
 
 <bird2>
   <file>assets/birdLeft.png</file>
-  <startLoc x="0" y="150"/>
+  <startLoc x="2000" y="230"/>
   <frames>5</frames>
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
@@ -252,7 +253,7 @@
 
 <bird2Left>
   <file>assets/birdRight.png</file>
-  <startLoc x="0" y="150"/>
+  <startLoc x="2000" y="230"/>
   <frames>5</frames>
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
@@ -268,7 +269,7 @@
 
 <bird3>
   <file>assets/birdLeft.png</file>
-  <startLoc x="140" y="340"/>
+  <startLoc x="3000" y="340"/>
   <frames>5</frames>
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
@@ -284,7 +285,7 @@
 
 <bird3Left>
   <file>assets/birdRight.png</file>
-  <startLoc x="140" y="340"/>
+  <startLoc x="3000" y="340"/>
   <frames>5</frames>
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
@@ -300,7 +301,7 @@
 
 <bird4>
   <file>assets/birdLeft.png</file>
-  <startLoc x="500" y="10"/>
+  <startLoc x="4000" y="410"/>
   <frames>5</frames>
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
@@ -316,7 +317,7 @@
 
 <bird4Left>
   <file>assets/birdRight.png</file>
-  <startLoc x="500" y="10"/>
+  <startLoc x="4000" y="410"/>
   <frames>5</frames>
   <imageWidth>50</imageWidth>
   <imageHeight>40</imageHeight>
@@ -329,6 +330,72 @@
     <distance>200</distance>
   </chunk>	
 </bird4Left>
+
+<bird5>
+  <file>assets/birdLeft.png</file>
+  <startLoc x="5000" y="520"/>
+  <frames>5</frames>
+  <imageWidth>50</imageWidth>
+  <imageHeight>40</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>650</speedX>
+  <speedY>650</speedY>
+  <transparency>true</transparency>
+  <chunk>
+    <size>7</size>
+    <distance>200</distance>
+  </chunk>	
+</bird5>
+
+<bird5Left>
+  <file>assets/birdRight.png</file>
+  <startLoc x="5000" y="520"/>
+  <frames>5</frames>
+  <imageWidth>50</imageWidth>
+  <imageHeight>40</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>650</speedX>
+  <speedY>650</speedY>
+  <transparency>true</transparency>
+  <chunk>
+    <size>7</size>
+    <distance>200</distance>
+  </chunk>	
+</bird5Left>
+
+<bird6>
+  <file>assets/birdLeft.png</file>
+  <startLoc x="6000" y="620"/>
+  <frames>5</frames>
+  <imageWidth>50</imageWidth>
+  <imageHeight>40</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>650</speedX>
+  <speedY>650</speedY>
+  <transparency>true</transparency>
+  <chunk>
+    <size>7</size>
+    <distance>200</distance>
+  </chunk>	
+</bird6>
+
+<bird6Left>
+  <file>assets/birdRight.png</file>
+  <startLoc x="6000" y="620"/>
+  <frames>5</frames>
+  <imageWidth>50</imageWidth>
+  <imageHeight>40</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>650</speedX>
+  <speedY>650</speedY>
+  <transparency>true</transparency>
+  <chunk>
+    <size>7</size>
+    <distance>200</distance>
+  </chunk>	
+</bird6Left>
+
+
 
 <hud>
   <Pool>
