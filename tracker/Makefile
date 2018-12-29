@@ -31,6 +31,9 @@ OBJS = \
 	enemySprite.o\
 	sound.o\
  	bulletPool.o\
+        triple.o\
+	lights.o\
+	light.o\
         chunk.o\
 	bullet.o\
 	engine.o \

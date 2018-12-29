@@ -4,15 +4,27 @@ Course:6160
 
 Clemson Email Address:deepas@g.clemson.edu
 
-Project no: 5
+Project no: 6
 
-Project due date: Dec 7, 2018
+Project due date: Dec 12, 2018
 
-Project description: My project is about a fireman being tramped in a Dark forest and he has to fight his enemies that is the bats in the game for him to be protected. The number of bats in the project can is data driven and can be changed to the desire number in the xml file. The fireman has the power to burn the bats but he cannot burn a bird which is very powerful. While he burns the bats he should protect himself from being eaten by the dangerous bird. If he is collided with the bird then the fireman is dead.
+Project description:  My project is about a fireman being tramped in a Dark forest and he has to fight his enemies that is the bats in the game for him to be protected. The number of bats in the project is data driven and can be changed to the desire number in the xml file. The fireman has the power to burn the bats but he cannot burn the birds which is very powerful.The birds are of supreme power and fireman does not have the power to kill them. If any of the birds collide with fireman then the fireman dies and the game concludes. If the fireman kills the bats first before the bird can kill him then the player wins.  
 
-Inorder to test the player exploding, player should get collided with the single kind of bird. The collision occurs saying the player is dead.
+Inorder to test the player exploding, player should get collided with the bird.
 
-In this project I have shown the objectpooling, hud with the active bullets and free lists, projectiles and explosions.  
+In this project I have shown the
+	objectpooling
+	hud 
+	hud for active bullets and free lists
+	projectiles
+	explosions
+	sound
+	lights
+	More powerful birds
+	god mode
+	restart
+	
+         
 
 Where I got my sprites:I have used multisprite bird, bats and player sprites all downloaded from the internet.
 
@@ -24,7 +36,7 @@ How many backgrounds do I have:I have 9 backgrounds
 https://edermunizz.itch.io/free-pixel-art-forest
 
 
-The easiest part of this project: Creation of hud to show the active and free lists.
+The easiest part of this project: Was to implement sound into my project.
 
 
-Problems that I had in completing this project: Object pooling and I had to explode my multisprites which was happening but not in the intended manner due to the positioning of the sprites. Struggled to understand the advancements in the frame for multisprite.
+Problems that I had in completing this project: To implement birds with more power and the position of the birds and also collision with the birds.

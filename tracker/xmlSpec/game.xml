@@ -2,7 +2,7 @@
 <GameData>
 <!-- screenTitle is also used to identify you and your animation. 
      So make sure to include your name as part of the screenTitle -->
-<title>The Tracker Framework</title>
+<title>Fireman</title>
 <maxStringSize>50</maxStringSize>
 
 <frameCapOn>true</frameCapOn>
@@ -21,6 +21,17 @@
   <width>6000</width>
   <height>793</height>
 </world>
+
+<numberOfLights>1</numberOfLights>
+<lightSpec lightX1="100" lightY1="100" lightZ1="100" />
+<!-- larger noneffectiveLighting the smaller the radius of the light -->
+<noneffectiveLighting>100000</noneffectiveLighting>
+<ambientLighting>10000</ambientLighting>
+<brightness>15000000</brightness>
+<diffuseGrid>
+   <x>6</x>
+   <y>6</y>
+</diffuseGrid>
 
 <layer1>
   <file>assets/Layer_0010_1.png</file>
@@ -395,38 +406,62 @@
   </chunk>	
 </bird6Left>
 
-
+<score>
+    <posX>300</posX>
+    <posY>70</posY>
+    <width>220</width>
+    <height>150</height>
+    <scorecolor>
+     <red>132</red>
+     <green>112</green>
+     <blue>255</blue>
+    <alpha>0</alpha>
+   </scorecolor>
+   <scoretextColor>
+    <red>112</red>
+    <green>212</green>
+    <blue>145</blue>
+    <alpha>50</alpha>
+   </scoretextColor>
+</score>
 
 <hud>
   <Pool>
-    <posX>670</posX>
-    <posY>410</posY>
+    <posX>440</posX>
+    <posY>440</posY>
     <width>180</width>
-    <height>60</height>
+    <height>30</height>
   </Pool>
+  <Pool1>
+    <posX>650</posX>
+    <posY>440</posY>
+    <width>180</width>
+    <height>30</height>
+  </Pool1>
   <posX>5</posX>
   <posY>5</posY>
-  <width>180</width>
-  <height>250</height>
+  <width>210</width>
+  <height>290</height>
   <hudColor>
     <red>132</red>
     <green>112</green>
     <blue>255</blue>
-    <alpha>50</alpha>
+    <alpha>0</alpha>
   </hudColor>
   <textColor>
     <red>46</red>
     <green>112</green>
     <blue>89</blue>
-    <alpha>0</alpha>
+    <alpha>50</alpha>
   </textColor>
   <text>Controls</text>
   <up>w:up</up>
   <left>a:left</left>
   <down>s:down</down>
   <right>d:right</right>
-  <collision>m:strategy</collision>
+  <collision>m:Per Pixel</collision>
   <hudshow>f1:Display Hud</hudshow>
+  <info>Kill all bats to win</info>
 </hud>
 
 </GameData>

@@ -7,6 +7,7 @@
 #include "hud.h"
 #include "smartSprite.h"
 #include "sound.h"
+#include "lights.h"
 
 
 
@@ -18,7 +19,7 @@ class Engine {
 public:
   Engine ();
   ~Engine ();
-  void play();
+  bool play();
   // void switchSprite();
 
 private:
@@ -53,6 +54,9 @@ private:
   SDLSound sound;
   int godmodeFlag;
   bool godmode;
+  bool restart;
+  Lights lights;
+  int score;
   
   void draw() const;
   void drawhud() const;

@@ -57,7 +57,10 @@ Engine::Engine() :
   shootingLeft(false),
   sound(),
   godmodeFlag(0),
-  godmode(false)
+  godmode(false),
+  restart(false),
+  lights(),
+  score(0)
 {
   int n = Gamedata::getInstance().getXmlInt("numberOfBats");
   bats.reserve(n);
@@ -114,30 +117,35 @@ void Engine::draw() const {
     IoMod::getInstance().writeText(strm.str(), 600, 30,displayColor);
   }
   else{
-    IoMod::getInstance().writeText("You have killed all bats", 500, 50,displayColor);
-    IoMod::getInstance().writeText(" You are clear to go", 500, 100, displayColor);
+    Hud::getInstance().drawwin(renderer,score);
+    clock.pause();
+   // IoMod::getInstance().writeText("You have killed all bats", 500, 50,displayColor);
+    //IoMod::getInstance().writeText(" You are clear to go", 500, 100, displayColor);
   }
   if(godmode==true){
     std::stringstream strm1;
     strm1<<"God Mode: ON";
-    IoMod::getInstance().writeText(strm1.str(),650,30,displayColor);
+    IoMod::getInstance().writeText(strm1.str(),250,440,{0,250,0,130});
+  }
+  if(bats.size()>0 && restart != false){
+    Hud::getInstance().drawlost(renderer,score); 
+    clock.pause();
   }
   strategies[currentStrategy]->draw();
   if ( (collision) && (godmode != true)) {
-    IoMod::getInstance().writeText("Oops: Collision, Player is dead", 200, 50,displayColor);
+   //IoMod::getInstance().writeText("Oops: Collision, Player is dead", 200, 50,displayColor);
   }  
-
   player->draw();
   drawhud();
+  Hud::getInstance().drawPool(renderer, player);
   viewport.draw();
+  lights.draw();
   SDL_RenderPresent(renderer);
 }
 
 void Engine::drawhud() const {
    if (flag || clock.getSeconds() <= 3){
     Hud::getInstance().draw(renderer);
-    Hud::getInstance().drawPool(renderer, player);
-
   }
 }
 
@@ -164,9 +172,11 @@ void Engine::checkForCollisions() {
   for(unsigned int j=0;j<sprites.size();++j){
     if(strategies[currentStrategy]->execute(*sprites[j], *player)){
       collision = true;
-      sound[5];
+      ++score;
       if(!godmode){
-        player->explode();
+       sound[5];
+       player->explode();
+       restart = true;
       }
    }
   }
@@ -174,13 +184,15 @@ void Engine::checkForCollisions() {
   auto it = bats.begin();
    while ( it != bats.end() ) {
      if ( strategies[currentStrategy]->execute(*player, **it)) {
-       sound[3];
+       ++score;
+       sound[1];
 	(*it)->explode();
 	  (*it)->setPosition(Vector2f((*it)->getPosition()[0], (*it)->getPosition()[1]));	
 		++it; 
       }
       else if((player)->collidedWith((*it))){
-        sound[3];
+	++score;
+        sound[6];
 	(*it)->explode();
 	(*it)->setPosition(Vector2f((*it)->getPosition()[0], (*it)->getPosition()[1]));
         	 ++it;
@@ -221,11 +233,12 @@ void Engine::update(Uint32 ticks) {
   layer8.update();
   layer9.update();
   player->update(ticks);
+  lights.update();
   viewport.update(); // always update viewport last
 }
 
 
-void Engine::play() {
+bool Engine::play() {
   SDL_Event event;
   const Uint8* keystate;
   bool done = false;
@@ -265,6 +278,11 @@ void Engine::play() {
 	  if(godmodeFlag%2!=0){godmode=true;}
           else {godmode=false;}
 	}
+	if ( keystate[SDL_SCANCODE_R] ) {
+          clock.unpause();
+	  godmode=false;
+          return true;
+	}
 	if (keystate[SDL_SCANCODE_F4] && !makeVideo) {
           std::cout << "Initiating frame capture" << std::endl;
           makeVideo = true;
@@ -302,4 +320,5 @@ void Engine::play() {
       }
     }
   }
+  return false;
 }
